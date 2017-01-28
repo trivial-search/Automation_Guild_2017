@@ -1,0 +1,81 @@
+---
+execution:
+- concurrency: 10
+  ramp-up: 10s
+  hold-for: 2m
+  #iterations: 0
+  scenario: login-logoff
+
+scenarios:
+  login-logoff:
+    #default-address: https://censusinterim-uat.cwp.govt.nz/census-test/landing/
+    #think-time: 2ms
+    #data-sources:
+    #- path: login-data.csv
+    requests:
+    # GET the home page
+    - url: https://censusinterim-uat.cwp.govt.nz/census-test/landing/
+      method: GET
+      label: HomePage
+
+    - url: https://censusinterim-uat.cwp.govt.nz/census-test/landing/
+      method: GET
+      label: LoginPage
+      extract-regexp:
+        #RVT: <input type="hidden" name="appActionToken" value="(.*)"
+        RVT: <input type="hidden" name="SecurityID" value="(.*)"  class="hidden" id="Form_UniqueCodeForm_SecurityID">
+      assert:
+      - "Welcome"
+        #<input type="hidden" name="SecurityID" value="dc5059a0aaa2dac53597c54d9176b41b70b4baac" class="hidden" id="Form_UniqueCodeForm_SecurityID">
+
+    - url: https://censusinterim-uat.cwp.govt.nz/census-test/landing/UniqueCodeForm
+      method: POST
+      label: DoLogin
+
+      body:
+        SecurityID: ${RVT}
+        action_doValidateCode: Start
+        uniqueCode: 100000001snj
+        uniqueCode_0: 100
+        uniqueCode_1: 000
+        uniqueCode_2: 001
+        uniqueCode_3: snj
+
+        #content-type: application/x-www-form-urlencoded
+        #remember_me: false
+      assert:
+      - "Log out1"
+
+
+services:
+- module: passfail
+  criteria:
+  - avg-rt of DoLogin>2s for 30s, stop as failed
+  - fail of DoLogin>50% for 10s,stop as failed
+
+#modules:
+reporting:
+- module: blazemeter
+  report-name: Jenkins Build Login test
+  dump-csv: perf_results.csv
+  #jmeter:
+  #  path: C:\apache-jmeter-3.0\apache-jmeter-3.0\bin
+    #download-link: https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-{version}.zip
+  #  version: 3.0
+  #  plugins:
+  #  - jpgc-json=2.2
+  #  - jmeter-ftp
+  #  - jpgc-casutg
+
+
+
+
+#reporting:
+#  - module: final_stats
+#  - module: console
+
+#settings:
+#  check-interval: 5s
+#  default-executor: jmeter
+
+#provisioning: local
