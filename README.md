@@ -17,4 +17,6 @@ UI Automation by Ryan
 Fourth session - May 2017 
 Calum - Use of TFS @ CCC , Basic Jenkins pipeline demo
 
+Fifth session - July 2017 
 
+Christina - Jenkins , making Rest API calls , using Reg Ex to extract value out of response and chaining them onto the next request 
