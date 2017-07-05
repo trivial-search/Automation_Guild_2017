@@ -11,5 +11,10 @@ Second session - 22/02/2017
 Page Objects 
 https://automationguild.com/speaker/nikoloay-advolodkin/
 
+Third session - April 2017 
+UI Automation by Ryan
+
+Fourth session - May 2017 
+Calum - Use of TFS @ CCC , Basic Jenkins pipeline demo
 
 
