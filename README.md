@@ -22,4 +22,6 @@ Fifth session - July 2017
 Christina - Jenkins , making Rest API calls , using Reg Ex to extract value out of response and chaining them onto the next request 
 https://drive.google.com/drive/u/1/folders/0B429CY7Ur4SwNjZnZVBXQlJFR1k
 
-
+Sixth session - August 2017 
+Christina - Continuing with more JMeter learning .. starting with some RegEx fundamentals and then looking at intergration Jenkins with JMeter to run tests 
+https://drive.google.com/drive/u/1/folders/0B429CY7Ur4SwNjZnZVBXQlJFR1k
